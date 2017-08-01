@@ -28,15 +28,25 @@ We can rephrase this as
 
 > A set of line segments, each connected end to end to form a closed shape.
 
-Note that we are dealing with ***segments***. Lines reach out towards infinity and we are only concerned with a section/segment of it. This requires two end points. Because polygons are in two dimensions, we know that our points are going to be a 2-tuple. 
-
-A set, LS, to contain two 2-tuples, called the verticies and connect them with a line. We call LS a line segment.
+Note that we are dealing with ***segments***. Lines reach out towards infinity and we are only concerned with a section/segment of it. This requires two end points. Because polygons are in two dimensions, we know that our points are going to be 2-tuples. 
+<br>
+ie
+<br>
+Point={(a,b) | a,b ( R}
+<br>
+If we extend our definition to Euclidean Space, we can say that our point is just an element of R^2.
+<br>
+When we have a set of two or more points, we can start connecting them together and creating line segments.
+<br>
+A set, LS, which contains two connected points is called a line segment.
 <br>
 Line Segment = {A, B} where A = {a,b), B = {c,d{ where a, b, c, d ( R^2
 <br>
-In summary, two points can be used to define a line segment. Collection of line segments arranged in a ring are called polygons.
+We can think of the line segment as being a subset of R^2. We are able to take many subsets of R^2 that contain two points and connect them with lines. When a point has two line segments connecting it, it is called a vertex.
 <br>
-Set of Points->Line Segment->Set of Line Segments->Polygons
+<br>
+
+
 
 ## Background
 Convex hulls are used in many different areas and has its roots in computational geometry. Many problems like bounding boxes rely on first having a convex hull. All algorithms start with a set of points defining a polygon. This repository has a couple of different methods for obtaining the convex hull.
