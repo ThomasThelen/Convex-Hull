@@ -49,36 +49,40 @@ We can think of the line segment as being a subset of R^2. We are able to take m
 
 
 ## Background
-Convex hulls are used in many different areas and has its roots in computational geometry. Many problems like bounding boxes rely on first having a convex hull. All algorithms start with a set of points defining a polygon. This repository has a couple of different methods for obtaining the convex hull.
+Convex hulls are used in many different areas and has its roots in computational geometry. Many problems like bounding boxes rely on first having a convex hull. One aspect that all algorithms share is that they need a set of points defining a polygon.
 <br>
-All of the repositories use the same structure: a Coordinate class and a ConvexHull class. The Coordinate class is identical throughout the projects.
+All of the repositories use the same structure: a Coordinate class and a ConvexHull class. The Coordinate class is identical throughout the projects. You will commonly see
+<br>
+<code> std::vector<Coordinate> polygon </code>
+
 <br>
 
-## Two-Halves
-This method computes the upper and lower halves of the convex hull, then combines them to give a complete convex hull.
+defining the polygon that will be passed to the algorithm.
 
-## Single Hull
-This method computes the convex hull in a single pass.
+## Graham Scan
+This algorithm computes the convex hull by using the Graham Scan. This implimentation assumes that the points are not sorted, which restricts the complexity time to O(nlogn). The complexity time of the convex hull algorim itself is O(n). If you have points that are already sorted, you can remove the sorting routines.
 
+<br>
+#####
 
-## 
+## Gift Wrapping (Jarvis March)
 
 ## Using/Modifing The Code
 If you need to use some of this code in your own code, here are a few tips. 
 #### 1. You can replace the Coordinate class with your own point class. If you go this route, you'll have to replace the GetX and GetY calls along with any spots where the Coordinate constructor is called. You can also replace the Coordinate class with a std::pair<double, double>. Again, you'll have to make modifications to get rid of the Coordinate member function calls and replace them with std::pair::first and std::pair::second.
 
-### 2. The lambda, isCounterClockwise, in ComputeConvexHull can be taken out and made into a full function if needed in other areas of the code.
+#### 2. The lambda, isCounterClockwise, in ComputeConvexHull can be taken out and made into a full function if needed in other areas of the code.
 
-### 3. ConvexHull::SortPoints can be implimented in a number of different ways, which can be found by google searching for convex hull or bounding box example code.
-
-
+#### 3. ConvexHull::SortPoints can be implimented in a number of different ways, which can be found by google searching for convex hull or bounding box example code.
 
 
 
 
-<center>##Soruces:</center>
+
+
+##Soruces
+[Convex Hull Algorithm List](https://en.wikipedia.org/wiki/Convex_hull_algorithms#Algorithms)
 <br>
-Convex Hull Algorithms[https://en.wikipedia.org/wiki/Convex_hull_algorithms#Algorithms]
 
 
 
