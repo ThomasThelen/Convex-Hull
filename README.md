@@ -1,9 +1,49 @@
 # The Convex Hull
-If you've run across this project, chances are you need to create a bounding box around some polygon. At this point, you may not know what a convex hull is but don't worry-we'll define it before diggging into the code. In short, a convex hull is the outer most points on a polygon. Some applications (like the bounding box) only need the outer-most parts of the polygon to accomplish some task. You can imagine that when drawing a rectangle around a polygon, only the outer points matter. Note that polygons are 2-dimensional. When we extend out to 3 dimensions, we are no longer dealing with polygons, but polyhedrons[https://en.wikipedia.org/wiki/Polyhedron].
+If you've run across this project, chances are you need to create a bounding box around some polygon. At this point, you may not know what a convex hull is but don't worry-we'll define it before digging into the code. In short, a convex hull is the outer most points on a polygon. Some applications (like the bounding box) only need the outer-most parts of the polygon to accomplish some task. Note that polygons are 2-dimensional. When we extend out to 3 dimensions, we are no longer dealing with polygons, but [polyhedrons](https://en.wikipedia.org/wiki/Polyhedron).
 
 <br/>
 
-Take for example, the two polygons below. When we draw the rectagle that encompasses ***all*** of the points in the polygon, we don't need to know anything about the inner points on the right hand side. We can "clean" this polygon by only considering the outer points: the convex hull, which is polygon 'B'. by 'clean', I mean we can pass the polygon to an algorithm that outputs only the outermost points. There are many different algorithms which do this-some are quicker than others.
+Consider the two polygons below. If we are interested in the global features of polygon A, we can see that the jagged right side does not contribute to its size. The convex hull of polygon A is polygon B. Note that we discarded the points on the jagged side and instead connected the two exterior points.
+
+<br/>
+
+![polygons](https://github.com/ThomasThelen/Convex-Hull/blob/master/Images/PolyDiff.png "Two Polygons")
+
+<br/>
+
+First, let's identify the concave line segments; this is shown in polygon A in the figure below. The two red line segments are concave, along with the two green line segments. Removing the two vertices, we arrive at polygon B. Note that there is a larger concave segment, colored red in polygon C. Once removing the vertex, we arrive at polygon D: the convex hull. Note that all vertices are convex. 
+
+<br/>
+
+![Convex Hull Process](https://github.com/ThomasThelen/Convex-Hull/blob/master/Images/Process.png "Examining the Convex Hull")
+
+<br/>
+
+To emphasize the convex/convex difference, refer to the image below. The first shows a concave segment. The second highlighted segment is convex. 
+
+<br/>
+
+![Concave/Convex Line Segments](https://github.com/ThomasThelen/Convex-Hull/blob/master/Images/ConcaveConvex.png "Concave/Convex")
+
+<br/>
+
+Now that we have the basic vocabulary down, we can define what a convex polygon is. Math Open Reference defines a convex polygon as
+> Definition: A polygon that has all interior angles less than 180°
+> (Result: All the vertices point 'outwards', away from the center.)
+
+Looking back at the example pictures above, you will notice that the convex line segments are all 180° or higher. We can use the last example to illustrate.
+
+<br/>
+
+![Concave/Convex Polygons](https://github.com/ThomasThelen/Convex-Hull/blob/master/Images/ConcaveConvexPolygons.png "Concave/Convex Polygons")
+
+<br/>
+
+The first polygon has vertices that have connecting line segments that are all greater 180°, it is convex. Note that we can pick any two points and draw a line that is completely contained in the polygon. The second polygon however, has an angle (B) which is less than 180°. We can take two points and connect a line which falls outside the polygon border. This polygon is concave.
+
+<br/>
+
+The goal of a convex hull algorithm is to take a polygon, and give the set of vertices  that gives the smallest convex polygon. The more common convex hull algorithms are listed below.
 
 <br/>
 
@@ -20,67 +60,44 @@ Take for example, the two polygons below. When we draw the rectagle that encompa
 
 <br/>
 
-Before we give a real definition to convex hull, lets recap what a polygon is on a high level, and then dip down into set theory for a more complete definition.From The Math Open Reference, a polygon is
-
-> A number of coplanar line segments, each connected end to end to form a closed shape.
-
-We can rephrase this as 
-
-> A set of line segments, each connected end to end to form a closed shape.
-
-Note that we are dealing with ***segments***. Lines reach out towards infinity and we are only concerned with a section/segment of it. This requires two end points. Because polygons are in two dimensions, we know that our points are going to be 2-tuples. 
-<br>
-ie
-<br>
-Point={(a,b) | a,b ( R}
-<br>
-If we extend our definition to Euclidean Space, we can say that our point is just an element of R^2.
-<br>
-When we have a set of two or more points, we can start connecting them together and creating line segments.
-<br>
-A set, LS, which contains two connected points is called a line segment.
-<br>
-Line Segment = {A, B} where A = {a,b), B = {c,d{ where a, b, c, d ( R^2
-<br>
-We can think of the line segment as being a subset of R^2. We are able to take many subsets of R^2 that contain two points and connect them with lines. When a point has two line segments connecting it, it is called a vertex.
-<br>
-<br>
 
 
-
-## Background
-Convex hulls are used in many different areas and has its roots in computational geometry. Many problems like bounding boxes rely on first having a convex hull. One aspect that all algorithms share is that they need a set of points defining a polygon.
-<br>
+## Code Structure
 All of the repositories use the same structure: a Coordinate class and a ConvexHull class. The Coordinate class is identical throughout the projects. You will commonly see
-<br>
+
+<br/>
+
 <code> std::vector<Coordinate> polygon </code>
 
-<br>
+<br/>
 
-defining the polygon that will be passed to the algorithm.
+defining the polygon that will be passed to the algorithm. The first step is creating a vector of coordinates.
+
+There is also a Polygon class, which has a member function that computes the convex hull. The Polygon constructor takes a vector of coordinates, and stores it internally. In case you don't want to keep the original polygon around, you may use the move constructor. The second step is creating this polygon class, and passing the set of polygon points to it. 
+
+<br/> 
+
+To compute the convex hull, call
+<code>Polygon::ComputeConvexHull()</code>
+which returns a vector of coordinates defining the convex polygon. 
 
 ## Graham Scan
-This algorithm computes the convex hull by using the Graham Scan. This implimentation assumes that the points are not sorted, which restricts the complexity time to O(nlogn). The complexity time of the convex hull algorim itself is O(n). If you have points that are already sorted, you can remove the sorting routines.
+This project computes the convex hull by using the Graham Scan. This implementation assumes that the points are not sorted, which restricts the complexity time to O(nlogn). The complexity time of the convex hull algorithm itself is O(n). If you have points that are already sorted, you can remove the sorting routines.
 
-<br>
-#####
+<br/>
 
-## Gift Wrapping (Jarvis March)
-
-## Using/Modifing The Code
+## Using/Modifying The Code
 If you need to use some of this code in your own code, here are a few tips. 
-#### 1. You can replace the Coordinate class with your own point class. If you go this route, you'll have to replace the GetX and GetY calls along with any spots where the Coordinate constructor is called. You can also replace the Coordinate class with a std::pair<double, double>. Again, you'll have to make modifications to get rid of the Coordinate member function calls and replace them with std::pair::first and std::pair::second.
+
+#### 1. You can replace the Coordinate class with your own point class. If you go this route, you'll have to replace the GetX and GetY calls along with any spots where the Coordinate constructor is called. You'll also have to modify the container that is returned from Polygon::ComputeConvexHull. You can also replace the Coordinate class with a std::pair<double, double>. Again, you'll have to make modifications to get rid of the Coordinate member function calls and replace them with std::pair::first and std::pair::second.
 
 #### 2. The lambda, isCounterClockwise, in ComputeConvexHull can be taken out and made into a full function if needed in other areas of the code.
 
-#### 3. ConvexHull::SortPoints can be implimented in a number of different ways, which can be found by google searching for convex hull or bounding box example code.
+#### 3. ConvexHull::SortPoints can be implemented in a number of different ways, which can be found by google searching for convex hull or bounding box example code.
 
 
 
-
-
-
-##Soruces
+## Soruces
 [Convex Hull Algorithm List](https://en.wikipedia.org/wiki/Convex_hull_algorithms#Algorithms)
 <br>
 
