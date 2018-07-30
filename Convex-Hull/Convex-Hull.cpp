@@ -58,7 +58,6 @@ bool Polygon::CrossProduct(const Coordinate& pointA, const Coordinate& pointB, c
 	return orientation > 0;
 }
 
-
 void Polygon::SetConvexHull(std::vector<Coordinate>&& convexPolygon)
 {
 	m_convexHull = std::move(convexPolygon);
@@ -84,7 +83,6 @@ bool Polygon::SortPoints(const Coordinate& pointA, const Coordinate& pointB)
 
 std::vector<Coordinate> Polygon::ComputeConvexHull()
 {
-
 	// The polygon needs to have at least three points
 	if (m_polygon.size() < 3)
 	{
