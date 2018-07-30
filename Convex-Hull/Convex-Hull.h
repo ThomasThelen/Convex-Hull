@@ -14,7 +14,6 @@ public:
 	void SetY(const double y);
 
 private:
-
 	double m_x;
 	double m_y;
 };
@@ -41,7 +40,6 @@ public:
 	std::vector<Coordinate> GetConvexHull();
 	std::vector<Coordinate> ComputeConvexHull();
 private:
-
 	void SetConvexHull(std::vector<Coordinate>&& convexPolygon);
 	void SetConvexHull(std::vector<Coordinate> convexPolygon);
 	bool SortPoints(const Coordinate& pointA, const Coordinate& pointB);
