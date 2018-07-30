@@ -1,4 +1,6 @@
 # The Convex Hull
+[![CodeFactor](https://www.codefactor.io/repository/github/thomasthelen/convex-hull/badge)](https://www.codefactor.io/repository/github/thomasthelen/convex-hull)
+
 If you've run across this project, chances are you need to create a bounding box around some polygon. At this point, you may not know what a convex hull is but don't worry-we'll define it before digging into the code. In short, a convex hull is the outer most points on a polygon. Some applications (like the bounding box) only need the outer-most parts of the polygon to accomplish some task. Note that polygons are 2-dimensional. When we extend out to 3 dimensions, we are no longer dealing with polygons, but [polyhedrons](https://en.wikipedia.org/wiki/Polyhedron).
 
 <br/>
