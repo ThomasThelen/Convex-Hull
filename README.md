@@ -1,5 +1,9 @@
-# The Convex Hull
-[![CodeFactor](https://www.codefactor.io/repository/github/thomasthelen/convex-hull/badge)](https://www.codefactor.io/repository/github/thomasthelen/convex-hull)
+
+![alt text](https://github.com/ThomasThelen/AntiDebugging/raw/master/anti-debug.png)
+[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)  [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()  [![CodeFactor](https://www.codefactor.io/repository/github/thomasthelen/convex-hull/badge)](https://www.codefactor.io/repository/github/thomasthelen/convex-hull)
+
+A long time ago, I had an interview where I was asked to solve a problem that amounted to the convex hull problem. Needles to say, I didn't get the job (okay I'll admit get/set methods are lame, but that's how our shop worked). This is the touched up code that I submitted. I've included a short tutorial on what the convex hull is, and how to solve it, incase you're in the middle of an interview and in a jam.
+
 
 If you've run across this project, chances are you need to create a bounding box around some polygon. At this point, you may not know what a convex hull is but don't worry-we'll define it before digging into the code. In short, a convex hull is the outer most points on a polygon. Some applications (like the bounding box) only need the outer-most parts of the polygon to accomplish some task. Note that polygons are 2-dimensional. When we extend out to 3 dimensions, we are no longer dealing with polygons, but [polyhedrons](https://en.wikipedia.org/wiki/Polyhedron).
 
