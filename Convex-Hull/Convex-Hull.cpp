@@ -3,9 +3,7 @@
 
 #include "stdafx.h"
 #include "Convex-Hull.h"
-
 #include <algorithm>
-
 
 Coordinate::Coordinate()
 {
@@ -35,7 +33,6 @@ void Coordinate::SetY(const double y)
 {
 	m_y = y;
 }
-
 
 Polygon::Polygon(std::vector<Coordinate>&& polygon) :
 	m_polygon(std::move(polygon))
