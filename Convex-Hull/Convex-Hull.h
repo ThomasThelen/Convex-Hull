@@ -31,7 +31,7 @@ Use:
 class Polygon
 {
 public:
-	Polygon(std::vector<Coordinate>&& polygon);
+	Polygon(std::vector<Coordinate>& polygon);
 	Polygon(const std::vector<Coordinate>& polygon);
 	Polygon();
 

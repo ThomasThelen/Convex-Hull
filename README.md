@@ -3,10 +3,11 @@
 
 [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)  [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()  [![CodeFactor](https://www.codefactor.io/repository/github/thomasthelen/convex-hull/badge)](https://www.codefactor.io/repository/github/thomasthelen/convex-hull)
 
-A long time ago, I had an interview for a video game company where I was asked to solve a problem that amounted to the convex hull problem. Needles to say, I didn't get the job but it was a fun excercise in computational geometry. This is the touched up code that I submitted. I've included a short tutorial on what the convex hull is, and how to solve it, in case you're in the middle of an interview and in a jam.
+## Background
+A long, long time ago I had an interview for a video game company where I was asked to solve a problem that amounted to the convex hull problem. Needles to say, I didn't get the job but it was a fun exercise in computational geometry. This is the touched up code that I submitted. I've included a short tutorial on what the convex hull is, and how to solve it - in case you're in the middle of an interview and in a jam.
 
 
-If you've run across this project, chances are you need to create a bounding box around some polygon. At this point, you may not know what a convex hull is but don't worry-we'll define it before digging into the code. In short, a convex hull is the outer most points on a polygon. Some applications (like the bounding box) only need the outer-most parts of the polygon to accomplish some task. Note that polygons are 2-dimensional. When we extend out to 3 dimensions, we are no longer dealing with polygons, but [polyhedrons](https://en.wikipedia.org/wiki/Polyhedron).
+If you've run across this project, chances are you need to create a bounding box around some polygon. At this point, you may not know what a convex hull is but don't worry-we'll define it before digging into the code. In short, a convex hull is the outer most points on a polygon. Some applications (like the bounding box) only need the outer-most parts of the polygon to accomplish some task. Note that polygons are 2-dimensional. When we extend out to 3 dimensions, we are no longer dealing with vanilla polygons, but [polyhedrons](https://en.wikipedia.org/wiki/Polyhedron).
 
 <br/>
 
@@ -94,7 +95,21 @@ This project computes the convex hull by using the Graham Scan. This implementat
 <br/>
 
 ## Using/Modifying The Code
-If you need to use some of this code in your own code, here are a few tips. 
+
+### Building
+To build, run the following from the `./build` directory.
+```
+cmake ..
+cmake --build .
+```
+
+You can now run the program with
+```
+./convex-hull
+```
+
+### Misc
+If you need to use some of this code in your own code, here are a few tips.
 
 #### 1. You can replace the Coordinate class with your own point class. If you go this route, you'll have to replace the GetX and GetY calls along with any spots where the Coordinate constructor is called. You'll also have to modify the container that is returned from Polygon::ComputeConvexHull. You can also replace the Coordinate class with a std::pair<double, double>. Again, you'll have to make modifications to get rid of the Coordinate member function calls and replace them with std::pair::first and std::pair::second.
 

@@ -1,9 +1,9 @@
 // Convex-Hull.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include "Convex-Hull.h"
 #include <algorithm>
+#include <iostream>
 
 Coordinate::Coordinate()
 {
@@ -24,17 +24,8 @@ double Coordinate::GetY() const
 	return m_y;
 }
 
-void Coordinate::SetX(const double x)
-{
-	m_x = x;
-}
 
-void Coordinate::SetY(const double y)
-{
-	m_y = y;
-}
-
-Polygon::Polygon(std::vector<Coordinate>&& polygon) :
+Polygon::Polygon(std::vector<Coordinate>& polygon) :
 	m_polygon(std::move(polygon))
 {
 }
@@ -116,11 +107,12 @@ std::vector<Coordinate> Polygon::ComputeConvexHull()
 
 int main()
 {
-	std::vector<Coordinate> polygonPoints = { {1,2}, {0,0} };
-	Polygon polygon(std::move(polygonPoints));
-
+	std::vector<Coordinate> polygonPoints = { {1,2}, {0.5, 1}, {0,0} };
+	Polygon polygon(polygonPoints);
 	auto convexHull = polygon.ComputeConvexHull();
-
+	for (const auto &coordinate: convexHull) {
+		std::cout << "(" << coordinate.GetX() << ", " << coordinate.GetY() <<")"<<std::endl;
+	}
 	return 0;
 }
 
